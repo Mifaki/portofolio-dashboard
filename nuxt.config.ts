@@ -19,6 +19,15 @@ export default defineNuxtConfig({
 			],
 		},
 	},
+	typescript: {
+		typeCheck: true,
+	},
+	components: [
+		{
+			path: '~/components',
+			pathPrefix: false,
+		},
+	],
 	modules: ['@nuxt/eslint', '@nuxt/ui'],
 	vite: { plugins: [tailwindcss()] },
 });
