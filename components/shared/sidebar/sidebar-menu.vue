@@ -6,7 +6,9 @@
 					:to="item.to"
 					:class="[
 						'flex items-center gap-x-2 rounded-md px-3 py-2 transition-colors',
-						route === item.to ? 'bg-gray-100 text-gray-900' : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900',
+						route === item.to
+							? 'bg-gray-100 text-gray-900 dark:bg-gray-800 dark:text-gray-300'
+							: 'text-gray-600 hover:bg-gray-50 hover:text-gray-900 dark:hover:bg-gray-800 dark:hover:text-gray-500',
 					]"
 				>
 					<UIcon :name="item.icon" class="h-5 w-5" />

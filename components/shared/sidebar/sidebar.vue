@@ -6,16 +6,12 @@
 	</aside>
 	<USeparator orientation="vertical" class="h-screen" />
 </template>
-
 <script setup lang="ts">
 	import { ref } from 'vue';
-
 	const isAuthenticated = ref<boolean>(false);
-
 	const handleSignIn = (): void => {
 		console.log('Sign in clicked');
 	};
-
 	const handleLogout = (): void => {
 		console.log('Logout clicked');
 	};

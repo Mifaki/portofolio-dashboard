@@ -1,7 +1,7 @@
 <template>
 	<USeparator class="w-full" />
 	<div class="px-4 py-4">
-		<UButton v-if="!isAuthenticated" block color="primary" @click="emit('sign-in')">
+		<UButton v-if="!isAuthenticated" block color="neutral" variant="outline" @click="emit('sign-in')">
 			<template #leading>
 				<UIcon name="i-heroicons-arrow-right-on-rectangle" />
 			</template>
