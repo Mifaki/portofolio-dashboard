@@ -5,6 +5,10 @@
         <template #leading>
           <UDashboardSidebarCollapse />
         </template>
+
+        <template #right>
+          <ThemeToggle />
+        </template>
       </UDashboardNavbar>
     </template>
 

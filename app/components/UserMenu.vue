@@ -5,8 +5,8 @@ defineProps<{
     collapsed?: boolean
 }>()
 
-const colorMode = useColorMode()
 const appConfig = useAppConfig()
+const { preference, setPreference } = useThemePreference()
 
 const colors = ['red', 'orange', 'amber', 'yellow', 'lime', 'green', 'emerald', 'teal', 'cyan', 'sky', 'blue', 'indigo', 'violet', 'purple', 'fuchsia', 'pink', 'rose']
 const neutrals = ['slate', 'gray', 'zinc', 'neutral', 'stone']
@@ -84,24 +84,28 @@ const items = computed<DropdownMenuItem[][]>(() => ([[{
         label: 'Light',
         icon: 'i-lucide-sun',
         type: 'checkbox',
-        checked: colorMode.value === 'light',
+        checked: preference.value === 'light',
         onSelect(e: Event) {
             e.preventDefault()
-
-            colorMode.preference = 'light'
+            setPreference('light')
         }
     }, {
         label: 'Dark',
         icon: 'i-lucide-moon',
         type: 'checkbox',
-        checked: colorMode.value === 'dark',
-        onUpdateChecked(checked: boolean) {
-            if (checked) {
-                colorMode.preference = 'dark'
-            }
-        },
+        checked: preference.value === 'dark',
         onSelect(e: Event) {
             e.preventDefault()
+            setPreference('dark')
+        }
+    }, {
+        label: 'System',
+        icon: 'i-lucide-monitor',
+        type: 'checkbox',
+        checked: preference.value === 'system',
+        onSelect(e: Event) {
+            e.preventDefault()
+            setPreference('system')
         }
     }]
 }], [{
