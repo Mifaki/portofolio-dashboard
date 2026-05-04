@@ -7,7 +7,7 @@
         </template>
 
         <template #right>
-          <ThemeToggle />
+          <SharedThemeToggle />
         </template>
       </UDashboardNavbar>
     </template>

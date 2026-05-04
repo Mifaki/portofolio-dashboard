@@ -3,7 +3,7 @@ export default defineNuxtConfig({
   modules: [
     '@nuxt/eslint',
     '@nuxt/ui',
-    
+    '@vueuse/nuxt'
   ],
 
   devtools: {
@@ -14,6 +14,12 @@ export default defineNuxtConfig({
 
   routeRules: {
     '/': { prerender: true }
+  },
+
+  runtimeConfig: {
+    public: {
+      apiBase: 'http://localhost:3008'
+    }
   },
 
   compatibilityDate: '2025-01-15',

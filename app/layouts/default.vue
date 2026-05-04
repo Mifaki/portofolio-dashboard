@@ -10,26 +10,24 @@ const links = [[{
     label: 'Home',
     icon: 'i-lucide-house',
     to: '/',
-    onSelect: () => {
-        open.value = false
-    }
+    onSelect: () => { open.value = false }
+}, {
+    label: 'Users',
+    icon: 'i-lucide-user-round',
+    to: '/users',
+    onSelect: () => { open.value = false }
 }, {
     label: 'Inbox',
     icon: 'i-lucide-inbox',
     to: '/inbox',
     badge: '4',
-    onSelect: () => {
-        open.value = false
-    }
+    onSelect: () => { open.value = false }
 }, {
     label: 'Customers',
     icon: 'i-lucide-users',
     to: '/customers',
-    onSelect: () => {
-        open.value = false
-    }
-},
-], [{
+    onSelect: () => { open.value = false }
+}], [{
     label: 'Feedback',
     icon: 'i-lucide-message-circle',
     to: 'https://github.com/nuxt-ui-templates/dashboard',
@@ -57,12 +55,9 @@ const groups = computed(() => [{
     }]
 }])
 
-
 onMounted(async () => {
     const cookie = useCookie('cookie-consent')
-    if (cookie.value === 'accepted') {
-        return
-    }
+    if (cookie.value === 'accepted') return
 
     toast.add({
         title: 'We use first-party cookies to enhance your experience on our website.',
@@ -72,9 +67,7 @@ onMounted(async () => {
             label: 'Accept',
             color: 'neutral',
             variant: 'outline',
-            onClick: () => {
-                cookie.value = 'accepted'
-            }
+            onClick: () => { cookie.value = 'accepted' }
         }, {
             label: 'Opt out',
             color: 'neutral',
@@ -88,8 +81,8 @@ onMounted(async () => {
     <UDashboardGroup unit="rem">
         <UDashboardSidebar id="default" v-model:open="open" collapsible resizable class="bg-elevated/25"
             :ui="{ footer: 'lg:border-t lg:border-default' }">
-            <template #header="{ collapsed }">
-               <p>Porto Dashboard</p>
+            <template #header>
+                <p>Porto Dashboard</p>
             </template>
 
             <template #default="{ collapsed }">
@@ -102,14 +95,12 @@ onMounted(async () => {
             </template>
 
             <template #footer="{ collapsed }">
-                <UserMenu :collapsed="collapsed" />
+                <AppUserMenu :collapsed="collapsed" />
             </template>
         </UDashboardSidebar>
 
         <UDashboardSearch :groups="groups" />
 
         <slot />
-
-        <NotificationsSlideover />
     </UDashboardGroup>
 </template>
