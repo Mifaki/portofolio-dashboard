@@ -3,6 +3,7 @@ import type { User } from '~/types/users'
 
 export interface UsersQuery {
   q?: string
+  roleId?: string
   page?: number
   limit?: number
 }

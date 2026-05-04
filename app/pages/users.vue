@@ -2,7 +2,7 @@
 import { createUserColumns } from '~/composables/users/columns'
 import { useUsers } from '~/composables/users/useUsers'
 
-const { users, meta, isLoading, error, refresh, q, page, limit } = useUsers()
+const { users, meta, isLoading, error, refresh, q, page, limit, roleId } = useUsers()
 const columns = createUserColumns()
 
 const searchInput = ref(q.value)
@@ -13,19 +13,12 @@ watch(q, (val) => { if (searchInput.value !== val) searchInput.value = val })
 <template>
   <UDashboardPanel id="users">
     <template #header>
-      <UDashboardNavbar title="Users" :ui="{ right: 'gap-3' }">
+      <UDashboardNavbar title="Users">
         <template #leading>
           <UDashboardSidebarCollapse />
         </template>
 
         <template #right>
-          <UInput
-            v-model="searchInput"
-            icon="i-lucide-search"
-            placeholder="Search users..."
-            :loading="isLoading"
-            class="w-48 lg:w-64"
-          />
           <SharedThemeToggle />
         </template>
       </UDashboardNavbar>
@@ -46,7 +39,18 @@ watch(q, (val) => { if (searchInput.value !== val) searchInput.value = val })
         v-model:page="page"
         :limit="limit"
         row-label="user"
-      />
+      >
+        <template #filters>
+          <UInput
+            v-model="searchInput"
+            icon="i-lucide-search"
+            placeholder="Search users..."
+            :loading="isLoading"
+            class="w-48 lg:w-64"
+          />
+          <SharedRoleSelect v-model="roleId" />
+        </template>
+      </SharedDataTable>
     </template>
   </UDashboardPanel>
 </template>
