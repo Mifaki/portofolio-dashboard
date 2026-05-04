@@ -8,6 +8,7 @@
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
     "lint": "eslint .",
+    "format": "prettier --write .",
     "typecheck": "nuxt typecheck"
   },
   "dependencies": {
@@ -16,11 +17,15 @@
     "@nuxt/ui": "^4.6.1",
     "@vueuse/nuxt": "^14.2.1",
     "nuxt": "^4.4.2",
-    "tailwindcss": "^4.2.2"
+    "tailwindcss": "^4.2.2",
+    "zod": "^4.4.3"
   },
   "devDependencies": {
     "@nuxt/eslint": "^1.15.2",
+    "@prettier/plugin-xml": "^3.4.2",
     "eslint": "^10.2.0",
+    "prettier": "^3.8.3",
+    "prettier-plugin-tailwindcss": "^0.8.0",
     "typescript": "^6.0.2",
     "vue-tsc": "^3.2.6"
   },
