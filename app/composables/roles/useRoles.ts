@@ -1,14 +1,11 @@
-import { rolesService } from './service'
+import { useRolesService } from './service'
 import type { ApiResponse } from '~/types/api'
 import type { Role } from '~/types/roles'
 
 export const useRoles = () => {
-  const config = useRuntimeConfig()
+  const service = useRolesService()
 
-  const { data, status } = useAsyncData<ApiResponse<Role[]>>(
-    'roles',
-    () => rolesService.getAll(config.public.apiBase)
-  )
+  const { data, status } = useAsyncData<ApiResponse<Role[]>>('roles', () => service.getAll())
 
   const roles = computed<Role[]>(() => {
     const d = data.value?.data

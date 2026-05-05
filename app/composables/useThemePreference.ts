@@ -1,4 +1,3 @@
-
 export const useThemePreference = () => {
   const colorMode = useColorMode()
   const preference = useState<string>('theme-preference', () => colorMode.preference)

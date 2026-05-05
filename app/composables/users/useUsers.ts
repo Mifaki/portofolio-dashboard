@@ -1,11 +1,11 @@
-import { usersService } from './service'
+import { useUsersService } from './service'
 import type { ApiResponse, PaginationMeta } from '~/types/api'
 import type { User } from '~/types/users'
 
 export const useUsers = () => {
-  const config = useRuntimeConfig()
   const route = useRoute()
   const router = useRouter()
+  const service = useUsersService()
   const { q, page, limit } = useQueryFilter({ page: 1, limit: 10 })
 
   const roleId = computed({
@@ -17,17 +17,18 @@ export const useUsers = () => {
         if (v !== undefined && v !== '') next[key] = String(v)
       }
       router.replace({ query: next })
-    }
+    },
   })
 
   const { data, status, error, refresh } = useAsyncData<ApiResponse<User[]>>(
     'users',
-    () => usersService.getAll(config.public.apiBase, {
-      q: q.value || undefined,
-      roleId: roleId.value || undefined,
-      page: page.value,
-      limit: limit.value
-    }),
+    () =>
+      service.getAll({
+        q: q.value || undefined,
+        roleId: roleId.value || undefined,
+        page: page.value,
+        limit: limit.value,
+      }),
     { watch: [q, page, limit, roleId] }
   )
 

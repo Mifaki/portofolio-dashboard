@@ -25,24 +25,24 @@ export const useQueryFilter = (defaults: QueryFilterDefaults = {}) => {
     if (!route.query.page || !route.query.limit) {
       update({
         page: route.query.page ? Number(route.query.page) : defaultPage,
-        limit: route.query.limit ? Number(route.query.limit) : defaultLimit
+        limit: route.query.limit ? Number(route.query.limit) : defaultLimit,
       })
     }
   })
 
   const q = computed({
     get: () => (route.query.q as string) ?? '',
-    set: (val: string) => update({ q: val || undefined, page: 1 })
+    set: (val: string) => update({ q: val || undefined, page: 1 }),
   })
 
   const page = computed({
     get: () => Number(route.query.page) || defaultPage,
-    set: (val: number) => update({ page: val })
+    set: (val: number) => update({ page: val }),
   })
 
   const limit = computed({
     get: () => Number(route.query.limit) || defaultLimit,
-    set: (val: number) => update({ limit: val, page: 1 })
+    set: (val: number) => update({ limit: val, page: 1 }),
   })
 
   return { q, page, limit }

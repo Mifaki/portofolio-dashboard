@@ -15,19 +15,19 @@ const emit = defineEmits<{ 'update:page': [value: number] }>()
 
 const currentPage = computed({
   get: () => props.page ?? 1,
-  set: (val: number) => emit('update:page', val)
+  set: (val: number) => emit('update:page', val),
 })
 </script>
 
 <template>
   <div class="flex flex-col">
-    <div v-if="$slots.filters" class="flex flex-wrap items-center justify-between gap-3 px-4 py-3">
-      <slot name="filters" />
+    <div v-if="$slots.headers" class="flex flex-wrap items-center justify-between gap-3 px-4 py-3">
+      <slot name="headers" />
     </div>
 
     <UTable
       :data="data"
-      :columns="(columns as any)"
+      :columns="columns as any"
       :loading="loading"
       sticky
       class="w-full flex-1"
@@ -39,15 +39,15 @@ const currentPage = computed({
     >
       <template #empty>
         <div class="flex flex-col items-center justify-center gap-2 py-12 text-center">
-          <UIcon name="i-lucide-inbox" class="size-8 text-muted" />
-          <p class="text-sm text-muted">No {{ rowLabel ? `${rowLabel}s` : 'results' }} found</p>
+          <UIcon name="i-lucide-inbox" class="text-muted size-8" />
+          <p class="text-muted text-sm">No {{ rowLabel ? `${rowLabel}s` : 'results' }} found</p>
         </div>
       </template>
     </UTable>
 
     <div v-if="meta" class="flex items-center justify-between px-4 py-3">
-      <p class="text-sm text-muted">
-        <span class="font-medium text-highlighted">{{ meta.total }}</span>
+      <p class="text-muted text-sm">
+        <span class="text-highlighted font-medium">{{ meta.total }}</span>
         {{ rowLabel ? (meta.total === 1 ? rowLabel : `${rowLabel}s`) : 'results' }}
       </p>
       <UPagination v-model:page="currentPage" :total="meta.total" :items-per-page="limit ?? 10" />

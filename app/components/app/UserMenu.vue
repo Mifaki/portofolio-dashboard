@@ -16,53 +16,71 @@ const displayEmail = computed(() => user.value?.email ?? '')
 const items = computed<DropdownMenuItem[][]>(() => {
   if (!isAuthenticated.value) return []
 
-  return [[{
-    type: 'label',
-    label: displayName.value,
-    description: displayEmail.value
-  }], [{
-    label: 'Profile',
-    icon: 'i-lucide-user'
-  }, {
-    label: 'Settings',
-    icon: 'i-lucide-settings',
-    to: '/settings'
-  }], [{
-    label: 'Appearance',
-    icon: 'i-lucide-sun-moon',
-    children: [{
-      label: 'Light',
-      icon: 'i-lucide-sun',
-      type: 'checkbox',
-      checked: preference.value === 'light',
-      onSelect(e: Event) {
-        e.preventDefault()
-        setPreference('light')
-      }
-    }, {
-      label: 'Dark',
-      icon: 'i-lucide-moon',
-      type: 'checkbox',
-      checked: preference.value === 'dark',
-      onSelect(e: Event) {
-        e.preventDefault()
-        setPreference('dark')
-      }
-    }, {
-      label: 'System',
-      icon: 'i-lucide-monitor',
-      type: 'checkbox',
-      checked: preference.value === 'system',
-      onSelect(e: Event) {
-        e.preventDefault()
-        setPreference('system')
-      }
-    }]
-  }], [{
-    label: 'Sign out',
-    icon: 'i-lucide-log-out',
-    onSelect: () => logout()
-  }]]
+  return [
+    [
+      {
+        type: 'label',
+        label: displayName.value,
+        description: displayEmail.value,
+      },
+    ],
+    [
+      {
+        label: 'Profile',
+        icon: 'i-lucide-user',
+      },
+      {
+        label: 'Settings',
+        icon: 'i-lucide-settings',
+        to: '/settings',
+      },
+    ],
+    [
+      {
+        label: 'Appearance',
+        icon: 'i-lucide-sun-moon',
+        children: [
+          {
+            label: 'Light',
+            icon: 'i-lucide-sun',
+            type: 'checkbox',
+            checked: preference.value === 'light',
+            onSelect(e: Event) {
+              e.preventDefault()
+              setPreference('light')
+            },
+          },
+          {
+            label: 'Dark',
+            icon: 'i-lucide-moon',
+            type: 'checkbox',
+            checked: preference.value === 'dark',
+            onSelect(e: Event) {
+              e.preventDefault()
+              setPreference('dark')
+            },
+          },
+          {
+            label: 'System',
+            icon: 'i-lucide-monitor',
+            type: 'checkbox',
+            checked: preference.value === 'system',
+            onSelect(e: Event) {
+              e.preventDefault()
+              setPreference('system')
+            },
+          },
+        ],
+      },
+    ],
+    [
+      {
+        label: 'Sign out',
+        icon: 'i-lucide-log-out',
+        onSelect: () => logout(),
+      },
+    ],
+  ]
 })
 </script>
 

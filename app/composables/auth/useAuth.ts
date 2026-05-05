@@ -3,20 +3,21 @@ import type { AuthUser } from '~/types/auth'
 
 export const useAuth = () => {
   const config = useRuntimeConfig()
+  const { api } = useApi()
 
   const token = useCookie<string | null>('auth-token', {
     default: () => null,
-    maxAge: 60 * 60 * 24 * 7
+    maxAge: 60 * 60 * 24 * 7,
   })
 
   const refreshToken = useCookie<string | null>('auth-refresh-token', {
     default: () => null,
-    maxAge: 60 * 60 * 24 * 30
+    maxAge: 60 * 60 * 24 * 30,
   })
 
   const user = useCookie<AuthUser | null>('auth-user', {
     default: () => null,
-    maxAge: 60 * 60 * 24 * 7
+    maxAge: 60 * 60 * 24 * 7,
   })
 
   const isAuthenticated = computed(() => !!token.value)
@@ -39,7 +40,9 @@ export const useAuth = () => {
 
   const logout = async () => {
     if (token.value) {
-      try { await authService.logout(config.public.apiBase, token.value) } catch {}
+      try {
+        await api('/auth/logout', { method: 'POST' })
+      } catch {}
     }
     token.value = null
     refreshToken.value = null
