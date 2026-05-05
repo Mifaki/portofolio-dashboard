@@ -24,6 +24,14 @@ const links = [
         open.value = false
       },
     },
+    {
+      label: 'Roles',
+      icon: 'i-lucide-shield',
+      to: '/roles',
+      onSelect: () => {
+        open.value = false
+      },
+    },
   ],
   [
     {
