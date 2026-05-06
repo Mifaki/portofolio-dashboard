@@ -13,8 +13,7 @@ export const useRolesService = () => {
   return {
     getAll: (query: RolesQuery = {}) => api<ApiResponse<Role[]>>('/roles', { query }),
 
-    create: (body: CreateRolePayload) =>
-      api<ApiResponse<Role>>('/roles', { method: 'POST', body }),
+    create: (body: CreateRolePayload) => api<ApiResponse<Role>>('/roles', { method: 'POST', body }),
 
     update: (id: string, body: UpdateRolePayload) =>
       api<ApiResponse<Role>>(`/roles/${id}`, { method: 'PUT', body }),

@@ -39,11 +39,11 @@ export const useApi = () => {
     })
 
     try {
-      return await $fetch<T>(url, {
+      return await ($fetch(url, {
         baseURL: config.public.apiBase,
         ...options,
         headers: buildHeaders(),
-      })
+      }) as Promise<T>)
     } catch (error: any) {
       const status = error?.response?.status
 
@@ -55,11 +55,11 @@ export const useApi = () => {
           throw error
         }
 
-        return $fetch<T>(url, {
+        return $fetch(url, {
           baseURL: config.public.apiBase,
           ...options,
           headers: buildHeaders(),
-        })
+        }) as Promise<T>
       }
 
       throw error

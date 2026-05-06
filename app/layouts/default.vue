@@ -32,6 +32,14 @@ const links = [
         open.value = false
       },
     },
+    {
+      label: 'Projects',
+      icon: 'i-lucide-folder-open',
+      to: '/projects',
+      onSelect: () => {
+        open.value = false
+      },
+    },
   ],
   [
     {

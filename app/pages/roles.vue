@@ -10,9 +10,7 @@ const service = useRolesService()
 const { isAuthenticated } = useAuth()
 const toast = useToast()
 
-const searchInput = ref(q.value)
-watch(searchInput, useDebounceFn((val: string) => { q.value = val }, 400))
-watch(q, (val) => { if (searchInput.value !== val) searchInput.value = val })
+const { searchInput } = useSearchInput(q)
 
 const isFormOpen = ref(false)
 const formMode = ref<'create' | 'edit'>('create')
@@ -78,11 +76,7 @@ const columns = createRoleColumns({ onEdit: openEdit, onDelete: openDelete, isAu
     </template>
 
     <template #body>
-      <SharedErrorState
-        v-if="error"
-        message="Failed to load roles."
-        @retry="() => refresh()"
-      />
+      <SharedErrorState v-if="error" message="Failed to load roles." @retry="() => refresh()" />
       <SharedDataTable
         v-else
         :data="roles"
@@ -121,15 +115,21 @@ const columns = createRoleColumns({ onEdit: openEdit, onDelete: openDelete, isAu
 
   <UModal v-model:open="isDeleteOpen" title="Delete Role">
     <template #body>
-      <p class="text-sm text-muted">
+      <p class="text-muted text-sm">
         Are you sure you want to delete
-        <span class="font-semibold text-highlighted">{{ deletingRole?.name }}</span>?
-        This action cannot be undone.
+        <span class="text-highlighted font-semibold">{{ deletingRole?.name }}</span
+        >? This action cannot be undone.
       </p>
     </template>
     <template #footer>
       <div class="flex justify-end gap-2">
-        <UButton color="neutral" variant="ghost" label="Cancel" :disabled="isDeleting" @click="isDeleteOpen = false" />
+        <UButton
+          color="neutral"
+          variant="ghost"
+          label="Cancel"
+          :disabled="isDeleting"
+          @click="isDeleteOpen = false"
+        />
         <UButton color="error" label="Delete" :loading="isDeleting" @click="confirmDelete" />
       </div>
     </template>

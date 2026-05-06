@@ -84,8 +84,18 @@ async function onSubmit(event: { data: any }) {
         </UFormField>
 
         <div class="flex justify-end gap-2 pt-2">
-          <UButton color="neutral" variant="ghost" label="Cancel" :disabled="isLoading" @click="open = false" />
-          <UButton type="submit" :label="mode === 'create' ? 'Create' : 'Save'" :loading="isLoading" />
+          <UButton
+            color="neutral"
+            variant="ghost"
+            label="Cancel"
+            :disabled="isLoading"
+            @click="open = false"
+          />
+          <UButton
+            type="submit"
+            :label="mode === 'create' ? 'Create' : 'Save'"
+            :loading="isLoading"
+          />
         </div>
       </UForm>
     </template>

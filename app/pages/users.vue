@@ -10,16 +10,7 @@ const service = useUsersService()
 const { isAuthenticated } = useAuth()
 const toast = useToast()
 
-const searchInput = ref(q.value)
-watch(
-  searchInput,
-  useDebounceFn((val: string) => {
-    q.value = val
-  }, 400)
-)
-watch(q, (val) => {
-  if (searchInput.value !== val) searchInput.value = val
-})
+const { searchInput } = useSearchInput(q)
 
 const isFormOpen = ref(false)
 const formMode = ref<'create' | 'edit'>('create')

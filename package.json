@@ -15,9 +15,13 @@
     "@iconify-json/lucide": "^1.2.102",
     "@iconify-json/simple-icons": "^1.2.78",
     "@nuxt/ui": "^4.6.1",
+    "@shopify/draggable": "^1.2.1",
+    "@uploadthing/nuxt": "^7.1.10",
+    "@uploadthing/vue": "^7.3.3",
     "@vueuse/nuxt": "^14.2.1",
     "nuxt": "^4.4.2",
     "tailwindcss": "^4.2.2",
+    "uploadthing": "^7.7.4",
     "zod": "^4.4.3"
   },
   "devDependencies": {
