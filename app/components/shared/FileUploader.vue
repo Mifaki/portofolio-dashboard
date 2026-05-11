@@ -49,9 +49,17 @@ async function handleFiles(files: FileList | null) {
 
   preview.value = URL.createObjectURL(file)
 
-  const result = await startUpload([file])
-  if (result?.[0]?.ufsUrl) {
-    emit('update:modelValue', result[0].ufsUrl)
+  try {
+    const result = await startUpload([file])
+    if (result?.[0]?.ufsUrl) {
+      emit('update:modelValue', result[0].ufsUrl)
+    } else {
+      preview.value = null
+      emit('error', 'Upload failed — no URL returned.')
+    }
+  } catch (e: any) {
+    preview.value = null
+    emit('error', e?.message ?? 'Upload failed.')
   }
 }
 
@@ -93,7 +101,6 @@ function clearImage(e: MouseEvent) {
   >
     <input ref="inputRef" type="file" :accept="accept" class="hidden" @change="onInputChange" />
 
-    <!-- Image preview -->
     <template v-if="preview">
       <div class="relative w-full">
         <img
@@ -118,7 +125,6 @@ function clearImage(e: MouseEvent) {
       </div>
     </template>
 
-    <!-- Empty state -->
     <template v-else>
       <div
         class="bg-elevated flex size-12 items-center justify-center rounded-full"

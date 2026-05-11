@@ -40,6 +40,14 @@ const links = [
         open.value = false
       },
     },
+    {
+      label: 'About',
+      icon: 'i-lucide-user-circle',
+      to: '/about',
+      onSelect: () => {
+        open.value = false
+      },
+    },
   ],
   [
     {
